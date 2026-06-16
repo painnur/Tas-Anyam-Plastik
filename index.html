@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tas Anyam Magelang Painnur Craft | Magell Bag</title>
+    <style>
+        /* --- RESET & BASE STYLE --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: #aacbeb;
+            color: rgb(21, 18, 18);
+            text-align: center;
+            padding: 1.5rem 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+        }
+        header p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* --- KATALOG CONTAINER --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .grid-produk {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* --- KARTU PRODUK (CARD) --- */
+        .card-produk {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-produk:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+
+        /* --- ADVANCED SLIDER SYSTEM (SQUARE 1:1) --- */
+        .slider-container {
+            width: 100%;
+            aspect-ratio: 1 / 1; 
+            background-color: #eaeded;
+            position: relative;
+            overflow: hidden;
+        }
+        .slider-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s ease-in-out;
+        }
+        .slide {
+            min-width: 100%;
+            height: 100%;
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            object-position: center;
+        }
+
+        /* Tombol Navigasi Panah */
+        .arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.75);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            z-index: 5;
+            user-select: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .arrow-btn:hover {
+            background: white;
+            color: #2e7d32;
+        }
+        .arrow-prev { left: 8px; }
+        .arrow-next { right: 8px; }
+
+        /* Indikator Titik (Dots) */
+        .slider-dots {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+            z-index: 5;
+        }
+        .dot {
+            width: 7px;
+            height: 7px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        /* --- DETAIL PRODUK --- */
+        .detail-produk {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .detail-produk h2 {
+            font-size: 1.15rem;
+            margin-bottom: 0.3rem;
+            color: #2c3e50;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .deskripsi {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin-bottom: 0.8rem;
+            height: 2.4rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* --- FORM OPSI --- */
+        .grup-opsi {
+            margin-bottom: 0.6rem;
+        }
+        .grup-opsi label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-bottom: 0.2rem;
+            color: #34495e;
+        }
+        .grup-opsi select {
+            width: 100%;
+            padding: 0.45rem;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+            background-color: #fff;
+            font-size: 0.8rem;
+            outline: none;
+            cursor: pointer;
+        }
+        .grup-opsi select:focus {
+            border-color: #2e7d32;
+        }
+
+        /* --- HARGA & TOMBOL --- */
+        .wrapper-harga {
+            margin-top: auto;
+            padding-top: 0.8rem;
+            border-top: 1px solid #ecf0f1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .harga-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .harga-display {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #e74c3c;
+            white-space: nowrap;
+        }
+        .aksi-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .btn-wa, .btn-cart {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 0.8rem;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.3rem;
+            transition: opacity 0.2s ease, background-color 0.2s ease;
+            white-space: nowrap;
+            border: none;
+            cursor: pointer;
+            flex: 1;
+        }
+        .btn-wa { background-color: #25d366; }
+        .btn-wa:hover { background-color: #20ba5a; }
+        .btn-cart { background-color: #f39c12; }
+        .btn-cart:hover { background-color: #e67e22; }
+
+        /* --- HALAMAN / SECTION KERANJANG BELANJA --- */
+        .cart-section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 3rem auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            max-width: 1200px;
+            width: 90%;
+        }
+        .cart-section h2 {
+            border-bottom: 2px solid #aacbeb;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        .cart-item-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 2;
+            min-width: 250px;
+        }
+        .cart-item-checkbox {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        .cart-item-details h4 {
+            color: #2c3e50;
+            font-size: 1rem;
+        }
+        .cart-item-details p {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+        }
+        .cart-item-control {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex: 1;
+            justify-content: flex-end;
+            min-width: 200px;
+        }
+        .qty-control {
+            display: flex;
+            align-items: center;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .qty-btn {
+            background: #eee;
+            border: none;
+            width: 28px;
+            height: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .qty-btn:hover { background: #ddd; }
+        .qty-val {
+            width: 40px;
+            text-align: center;
+            font-size: 0.9rem;
+            border: none;
+            outline: none;
+        }
+        .cart-item-price {
+            font-weight: bold;
+            color: #e74c3c;
+            min-width: 90px;
+            text-align: right;
+        }
+        .btn-hapus {
+            background: none;
+            border: none;
+            color: #c0392b;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0 0.5rem;
+        }
+        .btn-hapus:hover { color: #e74c3c; }
+        
+        .cart-summary {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        .total-text {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .total-price {
+            color: #e74c3c;
+            font-size: 1.4rem;
+        }
+        .btn-checkout-wa {
+            background-color: #25d366;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-weight: bold;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-checkout-wa:hover { background-color: #20ba5a; }
+        .empty-cart-msg {
+            text-align: center;
+            color: #7f8c8d;
+            padding: 2rem 0;
+        }
+
+        /* --- FLOATING CART ICON --- */
+        .floating-cart {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #f39c12;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 999;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* --- SECTION KONTAK --- */
+        .contact-container { 
+            width: 90%; 
+            max-width: 1200px; 
+            margin: 50px auto; 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 40px; 
+            background: #fff; 
+            padding: 30px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+        }
+        .contact-info { 
+            flex: 1; 
+            min-width: 280px; 
+        }
+        .contact-info h3 { 
+            color: #2c3e50; 
+            margin-bottom: 15px; 
+        }
+        .contact-info p { 
+            margin-bottom: 15px; 
+            color: #555; 
+        }
+
+        /* --- FOOTER --- */
+        footer { 
+            background-color: #aacbeb; 
+            color: #151212; 
+            text-align: center; 
+            padding: 20px 0; 
+            margin-top: 40px; 
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) { 
+            .contact-container { flex-direction: column; } 
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Toko Tas Anyam Plastik Painnur Craft</h1>
+        <h1>Magell Bag</h1>
+        <p>Kualitas Premium, Modis, dan Ramah Lingkungan</p>
+    </header>
+
+    <a href="#keranjang-belanja" class="floating-cart">
+        🛒
+        <span class="cart-badge" id="cart-badge">0</span>
+    </a>
+
+    <div class="container">
+        <div class="grid-produk">
+
+            <div class="card-produk" id="produk-1">
+                <div class="slider-container">
+                    <button class="arrow-btn arrow-prev">❮</button>
+                    <button class="arrow-btn arrow-next">❯</button>
+                    <div class="slider-wrapper">
+                        <div class="slide"><img src="image/PRODUK_1_1.jpeg" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_1_2.png" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_1_3.png" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_1_4.png" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_1_5.png" alt=""></div>
+                    </div>
+                    <div class="slider-dots"></div>
+                </div>
+                <div class="detail-produk">
+                    <h2>Tas Kotak</h2>
+                    <p class="deskripsi">Bahan Lurik Standard</p>
+                    <div class="grup-opsi">
+                        <label>Pilihan Warna:</label>
+                        <select class="pilih-warna">
+                            <option value="Pink List Putih">Pink List Putih</option>
+                            <option value="Hijau List Putih">Hijau List Putih</option>
+                            <option value="Kuning List Hijau">Kuning List Hijau</option>
+                            <option value="Biru List Putih">Biru List Putih</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
+                    <div class="grup-opsi">
+                        <label>Pilihan Ukuran:</label>
+                        <select class="pilih-ukuran" onchange="updateHarga(1)">
+                            <option value="Box 18 cm" data-harga="7700">Box 18 cm - Rp 7.700</option>
+                            <option value="Box 20 cm" data-harga="8800" selected>Box 20 cm - Rp 8.800</option>
+                            <option value="Box 22 cm" data-harga="9800">Box 22 cm - Rp 9.800</option>
+                            <option value="Box 25 cm" data-harga="11700">Box 25 cm - Rp 11.700</option> 
+                        </select>
+                    </div>
+                    <div class="wrapper-harga">
+                        <div class="harga-row">
+                            <div class="harga-display" id="harga-1">Rp 8.800</div>
+                        </div>
+                        <div class="aksi-buttons">
+                            <button class="btn-cart" onclick="tambahKeKeranjang(1, 'Tas Kotak Bahan Standard')">➕ 🛒</button>
+                            <a href="#" class="btn-wa" onclick="kirimWhatsApp(event, 1, 'Tas Kotak Bahan Standard')">Beli Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-produk" id="produk-2">
+                <div class="slider-container">
+                    <button class="arrow-btn arrow-prev">❮</button>
+                    <button class="arrow-btn arrow-next">❯</button>
+                    <div class="slider-wrapper">
+                        <div class="slide"><img src="image/PRODUK_2_1.jpeg" alt=""></div>
+                    </div>
+                    <div class="slider-dots"></div>
+                </div>
+                <div class="detail-produk">
+                    <h2>Tas Belanja Pasar</h2>
+                    <p class="deskripsi">Bahan lurik standard</p>
+                    <div class="grup-opsi">
+                        <label>Pilihan Warna:</label>
+                        <select class="pilih-warna">
+                            <option value="Random">Random</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
+                    <div class="grup-opsi">
+                        <label>Pilihan Ukuran:</label>
+                        <select class="pilih-ukuran" onchange="updateHarga(2)">
+                            <option value="S" data-harga="7000">S - Rp 7.000</option>
+                            <option value="M" data-harga="8500">M - Rp 8.500</option>
+                            <option value="L" data-harga="9500" selected>L - Rp 9.500</option>
+                            <option value="XL" data-harga="10500">XL - Rp 10.500</option>
+                            <option value="XXL" data-harga="12500">XXL - Rp 12.500</option>
+                        </select>
+                    </div>
+                    <div class="wrapper-harga">
+                        <div class="harga-row">
+                            <div class="harga-display" id="harga-2">Rp 9.500</div>
+                        </div>
+                        <div class="aksi-buttons">
+                            <button class="btn-cart" onclick="tambahKeKeranjang(2, 'Tas Belanja Pasar')">➕ 🛒</button>
+                            <a href="#" class="btn-wa" onclick="kirimWhatsApp(event, 2, 'Tas Belanja Pasar')">Beli Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-produk" id="produk-3">
+                <div class="slider-container">
+                    <button class="arrow-btn arrow-prev">❮</button>
+                    <button class="arrow-btn arrow-next">❯</button>
+                    <div class="slider-wrapper">
+                        <div class="slide"><img src="image/PRODUK_3_1.jpeg" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_3_2.jpeg" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_3_3.jpeg" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_3_4.jpeg" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_3_5.jpeg" alt=""></div>
+                    </div>
+                    <div class="slider-dots"></div>
+                </div>
+                <div class="detail-produk">
+                    <h2>Tas Kotak Kaca</h2>
+                    <p class="deskripsi">Bahan Kaca</p>
+                    <div class="grup-opsi">
+                        <label>Pilihan Warna:</label>
+                        <select class="pilih-warna">
+                            <option value="Fanta">Fanta</option>
+                            <option value="Hijau">Hijau</option>
+                            <option value="Merah">Merah</option>
+                            <option value="Orange">Orange</option>
+                            <option value="Hitam">Hitam</option>
+                            <option value="Putih">Putih</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
+                    <div class="grup-opsi">
+                        <label>Pilihan Ukuran:</label>
+                        <select class="pilih-ukuran" onchange="updateHarga(3)">
+                            <option value="Box 18 cm" data-harga="11000">Box 18 cm - Rp 11.000</option>
+                            <option value="Box 20 cm" data-harga="12500" selected>Box 20 cm - Rp 12.500</option>
+                            <option value="Box 22 cm" data-harga="14000">Box 22 cm - Rp 14.000</option>
+                            <option value="Box 25 cm" data-harga="16000">Box 25 cm - Rp 16.000</option> 
+                        </select>
+                    </div>
+                    <div class="wrapper-harga">
+                        <div class="harga-row">
+                            <div class="harga-display" id="harga-3">Rp 12.500</div>
+                        </div>
+                        <div class="aksi-buttons">
+                            <button class="btn-cart" onclick="tambahKeKeranjang(3, 'Tas Kotak Bahan Kaca')">➕ 🛒</button>
+                            <a href="#" class="btn-wa" onclick="kirimWhatsApp(event, 3, 'Tas Kotak Bahan Kaca')">Beli Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-produk" id="produk-4">
+                <div class="slider-container">
+                    <button class="arrow-btn arrow-prev">❮</button>
+                    <button class="arrow-btn arrow-next">❯</button>
+                    <div class="slider-wrapper">
+                        <div class="slide"><img src="image/PRODUK_4_1.jpeg" alt=""></div> 
+                        <div class="slide"><img src="image/PRODUK_4_2.jpeg" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_4_3.jpeg" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_4_4.jpeg" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_4_5.png" alt=""></div>       
+                    </div>
+                    <div class="slider-dots"></div>
+                </div>
+                <div class="detail-produk">
+                    <h2>Tas Belanja Pasar Halus</h2>
+                    <p class="deskripsi">Bahan lurik Halus</p>
+                    <div class="grup-opsi">
+                        <label>Pilihan Warna:</label>
+                        <select class="pilih-warna">
+                            <option value="Random">Random</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
+                    <div class="grup-opsi">
+                        <label>Pilihan Ukuran:</label>
+                        <select class="pilih-ukuran" onchange="updateHarga(4)">
+                            <option value="S" data-harga="14000">S - Rp 14.000</option>
+                            <option value="M" data-harga="15500">M - Rp 15.500</option>
+                            <option value="L" data-harga="17000" selected>L - Rp 17.000</option>
+                            <option value="XL" data-harga="19000">XL - Rp 19.000</option>
+                            <option value="XXL" data-harga="21000">XXL - Rp 21.000</option>
+                        </select>
+                    </div>
+                    <div class="wrapper-harga">
+                        <div class="harga-row">
+                            <div class="harga-display" id="harga-4">Rp 17.000</div>
+                        </div>
+                        <div class="aksi-buttons">
+                            <button class="btn-cart" onclick="tambahKeKeranjang(4, 'Tas Belanja Pasar Lurik Halus')">➕ 🛒</button>
+                            <a href="#" class="btn-wa" onclick="kirimWhatsApp(event, 4, 'Tas Belanja Pasar Lurik Halus')">Beli Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-produk" id="produk-5">
+                <div class="slider-container">
+                    <button class="arrow-btn arrow-prev">❮</button>
+                    <button class="arrow-btn arrow-next">❯</button>
+                    <div class="slider-wrapper">
+                        <div class="slide"><img src="image/PRODUK_5_1.png" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_5_2.png" alt=""></div>
+                    </div>
+                    <div class="slider-dots"></div>
+                </div>
+                <div class="detail-produk">
+                    <h2>Baby Bag Lurik</h2>
+                    <p class="deskripsi">Bahan Lurik Halus</p>
+                    <div class="grup-opsi">
+                        <label>Pilihan Warna:</label>
+                        <select class="pilih-warna">
+                            <option value="Merah List Putih">Merah List Putih</option>
+                            <option value="Hijau List Putih">Hijau List Putih</option>
+                            <option value="Hitam List Hijau">Hitam List Hijau</option>
+                            <option value="Biru List Putih">Biru List Putih</option>
+                            <option value="Putih List Hitam">Putih List Hitam</option>
+                        </select>
+                    </div>
+                    <div class="grup-opsi">
+                        <label>Pilihan Ukuran:</label>
+                        <select class="pilih-ukuran" onchange="updateHarga(5)">
+                            <option value="L = Panjang 35 x Lebar 18 x Tinggi 20" data-harga="19000">L (35x18x20) - Rp 19.000</option>
+                            <option value="XL = Panjang 40 x Lebar 20 x Tinggi 23" data-harga="22000">XL (40x20x23) - Rp 22.000</option>
+                        </select>
+                    </div>
+                    <div class="wrapper-harga">
+                        <div class="harga-row">
+                            <div class="harga-display" id="harga-5">Rp 19.000</div>
+                        </div>
+                        <div class="aksi-buttons">
+                            <button class="btn-cart" onclick="tambahKeKeranjang(5, 'Baby Bag Lurik Halus')">➕ 🛒</button>
+                            <a href="#" class="btn-wa" onclick="kirimWhatsApp(event, 5, 'Baby Bag Lurik Halus')">Beli Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-produk" id="produk-6">
+                <div class="slider-container">
+                    <button class="arrow-btn arrow-prev">❮</button>
+                    <button class="arrow-btn arrow-next">❯</button>
+                    <div class="slider-wrapper">
+                        <div class="slide"><img src="image/PRODUK_6_1.jpeg" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_6_2.jpeg" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_6_3.jpeg" alt=""></div>
+                    </div>
+                    <div class="slider-dots"></div>
+                </div>
+                <div class="detail-produk">
+                    <h2>Tas XXXL</h2>
+                    <p class="deskripsi">Bahan Embos</p>
+                    <div class="grup-opsi">
+                        <label>Pilihan Warna:</label>
+                        <select class="pilih-warna">
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
+                    <div class="grup-opsi">
+                        <label>Pilihan Ukuran:</label>
+                        <select class="pilih-ukuran" onchange="updateHarga(6)">
+                            <option value="XXL = Panjang 42 x Lebar 28 x Tinggi 37 cm" data-harga="55000">XXL (42x28x37 cm) - Rp 55.000</option>
+                        </select>
+                    </div>
+                    <div class="wrapper-harga">
+                        <div class="harga-row">
+                            <div class="harga-display" id="harga-6">Rp 55.000</div>
+                        </div>
+                        <div class="aksi-buttons">
+                            <button class="btn-cart" onclick="tambahKeKeranjang(6, 'Tas XXXL Bahan Embos')">➕ 🛒</button>
+                            <a href="#" class="btn-wa" onclick="kirimWhatsApp(event, 6, 'Tas XXXL Bahan Embos')">Beli Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-produk" id="produk-7">
+                <div class="slider-container">
+                    <button class="arrow-btn arrow-prev">❮</button>
+                    <button class="arrow-btn arrow-next">❯</button>
+                    <div class="slider-wrapper">
+                        <div class="slide"><img src="image/PRODUK_7_1.png" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_7_2.png" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_7_3.png" alt=""></div>    
+                    </div>
+                    <div class="slider-dots"></div>
+                </div>
+                <div class="detail-produk">
+                    <h2>Baby Bag Embos</h2>
+                    <p class="deskripsi">Bahan Embos</p>
+                    <div class="grup-opsi">
+                        <label>Pilihan Warna:</label>
+                        <select class="pilih-warna">
+                            <option value="Putih">Putih</option>
+                            <option value="Hitam">Hitam</option>
+                            <option value="Coklat Tua">Coklat Tua</option>
+                            <option value="Hijau">Hijau</option>
+                            <option value="Kuning">Kuning</option>
+                            <option value="Ungu">Ungu</option>
+                            <option value="Peach">Peach</option>
+                            <option value="Silver">Silver</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
+                    <div class="grup-opsi">
+                        <label>Pilihan Ukuran:</label>
+                        <select class="pilih-ukuran" onchange="updateHarga(7)">
+                            <option value="L = Panjang 35 x Lebar 18 x Tinggi 20" data-harga="26000">L (35x18x20) - Rp 26.000</option>
+                            <option value="XL = Panjang 40 x Lebar 20 x Tinggi 23" data-harga="28000">XL (40x20x23) - Rp 28.000</option>
+                        </select>
+                    </div>
+                    <div class="wrapper-harga">
+                        <div class="harga-row">
+                            <div class="harga-display" id="harga-7">Rp 26.000</div>
+                        </div>
+                        <div class="aksi-buttons">
+                            <button class="btn-cart" onclick="tambahKeKeranjang(7, 'Baby Bag Bahan Embos')">➕ 🛒</button>
+                            <a href="#" class="btn-wa" onclick="kirimWhatsApp(event, 7, 'Baby Bag Bahan Embos')">Beli Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-produk" id="produk-8">
+                <div class="slider-container">
+                    <button class="arrow-btn arrow-prev">❮</button>
+                    <button class="arrow-btn arrow-next">❯</button>
+                    <div class="slider-wrapper">
+                        <div class="slide"><img src="image/PRODUK_8_1.png" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_8_2.png" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_8_3.png" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_8_4.png" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_8_5.png" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_8_6.png" alt=""></div>
+                        <div class="slide"><img src="image/PRODUK_8_9.jpeg" alt=""></div>                    
+                    </div>
+                    <div class="slider-dots"></div>
+                </div>
+                <div class="detail-produk">
+                    <h2>Tas XXL</h2>
+                    <p class="deskripsi">Bahan Embos</p>
+                    <div class="grup-opsi">
+                        <label>Pilihan Warna:</label>
+                        <select class="pilih-warna">
+                            <option value="Random">Random</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
+                    <div class="grup-opsi">
+                        <label>Pilihan Ukuran:</label>
+                        <select class="pilih-ukuran" onchange="updateHarga(8)">
+                            <option value="Panjang 40 x Lebar 20 x Tinggi 30 cm" data-harga="14000">Panjang 40 x Lebar 20 x Tinggi 30 cm - Rp 40.000</option>
+                        </select>
+                    </div>
+                    <div class="wrapper-harga">
+                        <div class="harga-row">
+                            <div class="harga-display" id="harga-8">Rp 40.000</div>
+                        </div>
+                        <div class="aksi-buttons">
+                            <button class="btn-cart" onclick="tambahKeKeranjang(8, 'Tas XXL Bahan Embos')">➕ 🛒</button>
+                            <a href="#" class="btn-wa" onclick="kirimWhatsApp(event, 8, 'Tas XXL Bahan Embos')">Beli Sekarang</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <section class="cart-section" id="keranjang-belanja">
+        <h2>🛒 Keranjang Belanja Anda</h2>
+        <div id="cart-items-container">
+            </div>
+        
+        <div class="cart-summary">
+            <div class="total-text">Total Terpilih (<span id="checked-count">0</span> barang): <span class="total-price" id="cart-total-price">Rp 0</span></div>
+            <button class="btn-checkout-wa" onclick="checkoutKeranjang()">💬 Kirim Pesanan via WhatsApp</button>
+        </div>
+    </section>
+
+    <main class="contact-container">
+        <div class="contact-info">
+            <h3>Info Kontak Toko</h3>
+            <p>Punya pertanyaan seputar grosir, custom warna, atau ukuran tas? Jangan ragu untuk menghubungi kami melalui kontak di bawah ini:</p>
+            <p><strong>📍 Alamat Workshop:</strong><br><a href="https://maps.app.goo.gl/1fUfXM9aqizTCweE6" target="_blank" style="color: #27ae60; text-decoration: none; font-weight: bold;">Dusun Jombar RT 01 RW 09, Desa Pesidi, Kecamatan Grabag, Magelang.</a></p>
+            <p><strong>📞 WhatsApp:</strong><br><a href="https://wa.me/62895337004707" target="_blank" style="color: #27ae60; text-decoration: none; font-weight: bold;">0895337004707</a></p>
+            <p><strong>⏰ Jam Operasional:</strong><br>Senin - Sabtu: 08.00 - 17.00 WIB</p>
+        </div>
+    </main>     
+
+    <footer>
+        <p>© 2026 Toko Tas Anyam Plastik Painnur Craft. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const NOMOR_WA = "62895337004707"; 
+        let keranjang = JSON.parse(localStorage.getItem('painnur_cart')) || [];
+
+        // 1. ENGINE SLIDER
+        class ProductSlider {
+            constructor(container) {
+                this.container = container;
+                this.wrapper = container.querySelector('.slider-wrapper');
+                this.slides = container.querySelectorAll('.slide');
+                this.dotsContainer = container.querySelector('.slider-dots');
+                this.btnPrev = container.querySelector('.arrow-prev');
+                this.btnNext = container.querySelector('.arrow-next');
+                
+                this.currentIndex = 0;
+                this.totalSlides = this.slides.length;
+                this.startX = 0;
+                this.isSwiping = false;
+
+                if (this.totalSlides > 0) {
+                    this.initSlider();
+                }
+            }
+
+            initSlider() {
+                for (let i = 0; i < this.totalSlides; i++) {
+                    const dot = document.createElement('div');
+                    dot.classList.add('dot');
+                    if (i === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => this.goToSlide(i));
+                    this.dotsContainer.appendChild(dot);
+                }
+
+                if (this.btnNext) this.btnNext.addEventListener('click', () => this.nextSlide());
+                if (this.btnPrev) this.btnPrev.addEventListener('click', () => this.prevSlide());
+
+                this.container.addEventListener('touchstart', (e) => {
+                    this.startX = e.touches[0].clientX;
+                    this.isSwiping = true;
+                });
+
+                this.container.addEventListener('touchend', (e) => {
+                    if (!this.isSwiping) return;
+                    let endX = e.changedTouches[0].clientX;
+                    let distance = this.startX - endX;
+
+                    if (Math.abs(distance) > 50) {
+                        if (distance > 0) this.nextSlide();
+                        else this.prevSlide();
+                    }
+                    this.isSwiping = false;
+                });
+            }
+
+            updateSliderPosition() {
+                this.wrapper.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+                const dots = this.dotsContainer.querySelectorAll('.dot');
+                dots.forEach((dot, idx) => {
+                    if (idx === this.currentIndex) dot.classList.add('active');
+                    else dot.classList.remove('active');
+                });
+            }
+
+            nextSlide() {
+                this.currentIndex = (this.currentIndex + 1) % this.totalSlides;
+                this.updateSliderPosition();
+            }
+
+            prevSlide() {
+                this.currentIndex = (this.currentIndex - 1 + this.totalSlides) % this.totalSlides;
+                this.updateSliderPosition();
+            }
+
+            goToSlide(index) {
+                this.currentIndex = index;
+                this.updateSliderPosition();
+            }
+        }
+
+        document.querySelectorAll('.slider-container').forEach(container => {
+            new ProductSlider(container);
+        });
+
+        // FORMATTER RUPIAH
+        const formatRupiah = (angka) => {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0
+            }).format(angka).replace("IDR", "Rp").trim();
+        };
+
+        // 2. LOGIK UPDATING HARGA DI KATALOG
+        function updateHarga(idProduk) {
+            const card = document.getElementById(`produk-${idProduk}`);
+            const selectUkuran = card.querySelector('.pilih-ukuran');
+            const opsiTerpilih = selectUkuran.options[selectUkuran.selectedIndex];
+            const hargaTerpilih = opsiTerpilih.getAttribute('data-harga');
+            
+            document.getElementById(`harga-${idProduk}`).innerText = formatRupiah(hargaTerpilih);
+        }
+
+        // 3. LOGIK KIRIM DATA SATUAN LANGSUNG (BELI SEKARANG)
+        function kirimWhatsApp(event, idProduk, namaProduk) {
+            event.preventDefault();
+            
+            const card = document.getElementById(`produk-${idProduk}`);
+            const warna = card.querySelector('.pilih-warna').value;
+            const selectUkuran = card.querySelector('.pilih-ukuran');
+            const ukuranText = selectUkuran.options[selectUkuran.selectedIndex].text;
+
+            const teksPesan = `Halo Admin, saya mau order produk ini:\n\n` +
+                              `• Nama Produk : ${namaProduk}\n` +
+                              `• Pilihan Warna : ${warna}\n` +
+                              `• Ukuran & Harga : ${ukuranText}\n\n` +
+                              `Mohon info ketersediaan stok dan total ongkirnya ya. Terima kasih!`;
+
+            const URL_WhatsApp = `https://api.whatsapp.com/send?phone=${NOMOR_WA}&text=${encodeURIComponent(teksPesan)}`;
+            window.open(URL_WhatsApp, '_blank');
+        }
+
+        // ================= SISTEM KERANJANG BELANJA BARU =================
+
+        // TAMBAH BARANG KE KERANJANG
+        function tambahKeKeranjang(idProduk, namaProduk) {
+            const card = document.getElementById(`produk-${idProduk}`);
+            const warna = card.querySelector('.pilih-warna').value;
+            const selectUkuran = card.querySelector('.pilih-ukuran');
+            const ukuran = selectUkuran.value;
+            const harga = parseInt(selectUkuran.options[selectUkuran.selectedIndex].getAttribute('data-harga'));
+
+            // Buat ID unik berdasarkan kombinasi produk, warna, dan ukuran
+            const cartItemId = `${idProduk}-${warna.replace(/\s+/g, '')}-${ukuran.replace(/\s+/g, '')}`;
+
+            // Cek apakah item yang persis sama sudah ada di keranjang
+            const itemExisting = keranjang.find(item => item.id === cartItemId);
+
+            if (itemExisting) {
+                itemExisting.qty += 1;
+            } else {
+                keranjang.push({
+                    id: cartItemId,
+                    idProduk: idProduk,
+                    nama: namaProduk,
+                    warna: warna,
+                    ukuran: ukuran,
+                    harga: harga,
+                    qty: 1,
+                    checked: true // Otomatis dicentang saat pertama masuk keranjang
+                });
+            }
+
+            simpanDanRenderKeranjang();
+            alert(`Berhasil menambahkan "${namaProduk} (${warna})" ke keranjang belanja!`);
+        }
+
+        // SIMPAN & RENDER
+        function simpanDanRenderKeranjang() {
+            localStorage.setItem('painnur_cart', JSON.stringify(keranjang));
+            
+            // Hitung total kuantitas untuk Badge ikon melayang
+            const totalQty = keranjang.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cart-badge').innerText = totalQty;
+
+            const container = document.getElementById('cart-items-container');
+            container.innerHTML = '';
+
+            if (keranjang.length === 0) {
+                container.innerHTML = `<div class="empty-cart-msg">Keranjang belanja Anda masih kosong. Silakan pilih produk di atas.</div>`;
+                document.getElementById('cart-total-price').innerText = formatRupiah(0);
+                document.getElementById('checked-count').innerText = 0;
+                return;
+            }
+
+            let totalHargaKeseluruhan = 0;
+            let barangTercentangCount = 0;
+
+            keranjang.forEach((item, index) => {
+                const totalHargaItem = item.harga * item.qty;
+                if (item.checked) {
+                    totalHargaKeseluruhan += totalHargaItem;
+                    barangTercentangCount += item.qty;
+                }
+
+                const itemHTML = `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <input type="checkbox" class="cart-item-checkbox" ${item.checked ? 'checked' : ''} onchange="toggleCheck(${index})">
+                            <div class="cart-item-details">
+                                <h4>${item.nama}</h4>
+                                <p>Warna: ${item.warna} | Ukuran: ${item.ukuran}</p>
+                                <p>Harga Satuan: ${formatRupiah(item.harga)}</p>
+                            </div>
+                        </div>
+                        <div class="cart-item-control">
+                            <div class="qty-control">
+                                <button class="qty-btn" onclick="ubahQty(${index}, -1)">-</button>
+                                <input type="text" class="qty-val" value="${item.qty}" readonly>
+                                <button class="qty-btn" onclick="ubahQty(${index}, 1)">+</button>
+                            </div>
+                            <div class="cart-item-price">${formatRupiah(totalHargaItem)}</div>
+                            <button class="btn-hapus" onclick="hapusItem(${index})">🗑️</button>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', itemHTML);
+            });
+
+            document.getElementById('cart-total-price').innerText = formatRupiah(totalHargaKeseluruhan);
+            document.getElementById('checked-count').innerText = barangTercentangCount;
+        }
+
+        // UBAH KUANTITAS
+        function ubahQty(index, direktif) {
+            keranjang[index].qty += direktif;
+            if (keranjang[index].qty < 1) keranjang[index].qty = 1;
+            simpanDanRenderKeranjang();
+        }
+
+        // TOGGLE CHECKBOX CENTANG
+        function toggleCheck(index) {
+            keranjang[index].checked = !keranjang[index].checked;
+            simpanDanRenderKeranjang();
+        }
+
+        // HAPUS ITEM DARI KERANJANG
+        function hapusItem(index) {
+            if (confirm(`Hapus "${keranjang[index].nama}" dari keranjang?`)) {
+                keranjang.splice(index, 1);
+                simpanDanRenderKeranjang();
+            }
+        }
+
+        // ACTION CHECKOUT / KIRIM DAFTAR PRODUK YANG DICENTANG KE WHATSAPP
+        function checkoutKeranjang() {
+            const itemTerpilih = keranjang.filter(item => item.checked);
+
+            if (itemTerpilih.length === 0) {
+                alert('Silakan centang/pilih minimal satu produk di keranjang belanja terlebih dahulu!');
+                return;
+            }
+
+            let teksPesan = `Halo Admin Painnur Craft, saya ingin memesan barang-barang berikut dari Keranjang Belanja saya:\n\n`;
+            let totalAkhir = 0;
+
+            itemTerpilih.forEach((item, idx) => {
+                const subTotal = item.harga * item.qty;
+                totalAkhir += subTotal;
+                teksPesan += `${idx + 1}. *${item.nama}*\n` +
+                             `   • Warna: ${item.warna}\n` +
+                             `   • Ukuran: ${item.ukuran}\n` +
+                             `   • Jumlah: ${item.qty} pcs x ${formatRupiah(item.harga)}\n` +
+                             `   • Subtotal: ${formatRupiah(subTotal)}\n\n`;
+            });
+
+            teksPesan += `*Total Pembayaran: ${formatRupiah(totalAkhir)}*\n\n` +
+                         `Mohon informasikan ketersediaan stok produk di atas ya admin. Terima kasih!`;
+
+            const URL_WhatsApp = `https://api.whatsapp.com/send?phone=${NOMOR_WA}&text=${encodeURIComponent(teksPesan)}`;
+            window.open(URL_WhatsApp, '_blank');
+        }
+
+        // Jalankan render keranjang pertama kali saat web dibuka
+        document.addEventListener("DOMContentLoaded", () => {
+            simpanDanRenderKeranjang();
+        });
+    </script>
+</body>
+</html>
